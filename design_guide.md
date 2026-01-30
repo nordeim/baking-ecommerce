@@ -1,4 +1,4 @@
-# 🎨 *UI STYLE DESIGN GUIDE — CLAUDE SKILLS SYSTEM*
+# 🎨 *UI STYLE DESIGN GUIDE*
 
 ## L’Artisan Baking Atelier
 
