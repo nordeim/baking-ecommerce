@@ -1,0 +1,33 @@
+{
+  "name": "learn-baking-ecommerce",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "next": "16.1.4",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "framer-motion": "^12.29.0",
+    "zustand": "^5.0.3",
+    "lucide-react": "^0.469.0",
+    "@radix-ui/react-slot": "^1.1.1",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "tailwind-merge": "^2.6.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "tailwindcss": "^4.1.18",
+    "@tailwindcss/postcss": "^4.1.18",
+    "postcss": "^8.5.3",
+    "typescript": "^5.9.3"
+  }
+}
