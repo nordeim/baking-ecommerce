@@ -39,20 +39,31 @@ const Sheet: React.FC<SheetProps> = ({ children, open: controlledOpen, onOpenCha
   );
 };
 
-const SheetTrigger: React.FC<{ children: React.ReactNode; asChild?: boolean }> = ({ 
-  children, 
-  asChild 
-}) => {
+interface SheetTriggerProps {
+  children: React.ReactNode;
+  asChild?: boolean;
+}
+
+const SheetTrigger: React.FC<SheetTriggerProps> = ({ children, asChild }) => {
   const { onOpenChange } = useSheet();
 
+  const handleClick = React.useCallback(() => {
+    onOpenChange(true);
+  }, [onOpenChange]);
+
   if (asChild && React.isValidElement(children)) {
-    return React.cloneElement(children as React.ReactElement, {
-      onClick: () => onOpenChange(true)
+    // Type-safe clone with explicit props typing
+    const child = children as React.ReactElement<{
+      onClick?: React.MouseEventHandler;
+    }>;
+
+    return React.cloneElement(child, {
+      onClick: handleClick
     });
   }
 
   return (
-    <button onClick={() => onOpenChange(true)}>
+    <button type="button" onClick={handleClick}>
       {children}
     </button>
   );
@@ -83,21 +94,25 @@ const SheetContent: React.FC<SheetContentProps> = ({
       <div 
         className="fixed inset-0 bg-charcoal/40 backdrop-blur-sm z-40 transition-opacity"
         onClick={() => onOpenChange(false)}
+        aria-hidden="true"
       />
       <div
         className={cn(
           "fixed z-50 bg-bone shadow-2xl transition-transform duration-500 ease-out",
           "top-0 h-full w-full sm:max-w-md",
-          side === "right" ? "right-0 translate-x-0" : "left-0 translate-x-0",
+          side === "right" ? "right-0" : "left-0",
           className
         )}
+        role="dialog"
+        aria-modal="true"
       >
         <button
+          type="button"
           onClick={() => onOpenChange(false)}
           className="absolute right-4 top-4 rounded-full p-2 opacity-70 hover:opacity-100 transition-opacity"
+          aria-label="Close"
         >
           <X className="h-6 w-6 text-charcoal" />
-          <span className="sr-only">Close</span>
         </button>
         {children}
       </div>
